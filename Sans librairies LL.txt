@@ -1,0 +1,28 @@
+	RCC->APB2ENR = RCC->APB2ENR | RCC_APB2ENR_IOPCEN; // activation de la clock du périphérique du port C lié à APB2
+		
+	
+		// Configuration du start/stop en mode Floating Input --> Port C Pin 8 --> 0100
+		GPIOC->CRH &=~ (0xF); 			// On met l'ensemble de la pin 8 à 0 (analog input)
+		GPIOC->CRH |= (0x1 << 2);  // On passe le bit de rang 2 à 1 pour configurer en Floating input
+		
+		// Configuration de la LED PC10 en output PushPull --> Port C Pin 10 --> 0001 par exemple
+		//GPIOC->CRH &=~ (0xF << 8);	// On met l'ensemble de la pin 10 à 0 (analog input)
+		//GPIOC->CRH |= (0x1 << 8);   // On passe le bit de rang 2 à 1 pour configurer en PushPull Output
+	
+	
+	
+		// Configuration de la LED PC10 en output Open Drain --> Port C Pin 10 --> 0101 par exemple
+		GPIOC->CRH &=~ (0xF << 8);	// On met l'ensemble de la pin 10 à 0 (analog input)
+		GPIOC->CRH |= (0x1 << 8);   // On passe le bit de rang 8 à 1 pour configurer en Output
+		GPIOC->CRH |= (0x1 << 10);   // On passe le bit de rang 10 à 1 pour configurer en Open Drain
+		
+		
+		
+		 /* Infinite loop */
+  while (1)
+  {
+		if (GPIOC->IDR & (0x01 << 8)) { // si on presse le bouton start -> le bit de rang 8 du registre IDR passe à 1
+			GPIOC->ODR ^= (0x01 << 10);		// alors on allume la LED si elle était éteinte ou on l'éteint si elle était allumée
+																		// on utilise un OU EXCLUSIF (=XOR) pour changer la valeur du bit de rang 10 de ODR
+		}
+  }
