@@ -5,6 +5,7 @@
 *.lst
 *.dep
 Project.uvoptx
+Project.uvguix.*
 
 # Prerequisites
 *.d
