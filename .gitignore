@@ -1,3 +1,11 @@
+# keil
+*.axf
+*.crf
+*.htm
+*.lst
+*.dep
+Project.uvoptx
+
 # Prerequisites
 *.d
 
