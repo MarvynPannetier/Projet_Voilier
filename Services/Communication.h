@@ -16,6 +16,7 @@
 
 int Calcul_Etat_Voiles(void);
 
+
 /**
 	* @brief  Envoie l'état de la voile
   * @note   vaut 0% si voiles relachées et 100% si voiles tendues au maximum

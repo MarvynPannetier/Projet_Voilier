@@ -64,6 +64,7 @@ int main(void)
 	
 	envoi_donnee('a');
 	
+	
   while (1)
   {
 		//tâche de fond : transmission USART

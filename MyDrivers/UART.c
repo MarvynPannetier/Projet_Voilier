@@ -78,6 +78,7 @@ void USART1_Conf_io() {
 		// Half duplex
 		//LL_USART_EnableHalfDuplex(USART1);
 	}
+
 	
 	/**
 	* @brief  envoi de la donnée par l'USART1 et gestion de TX
