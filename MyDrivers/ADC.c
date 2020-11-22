@@ -11,6 +11,8 @@ void configure_adc1_single(int v) {
     ADC1->CR2|= ADC_CR2_ADON; 						// démarrage ADC1
     ADC1->SQR1&= ADC_SQR1_L; 							// fixe le nombre de conversions à 1
     ADC1->SQR3|= v; 											// indique la voie à convertir
+    ADC1->SQR3|= v; 											// indique la voie à convertir
+    ADC1->SQR3|= v; 											// indique la voie à convertir
     ADC1->CR2 |= ADC_CR2_CAL; 						// debut de la calibration
     while ((ADC1->CR2 & ADC_CR2_CAL)); 		// attente de la fin de la calibration
 }
