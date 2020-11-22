@@ -25,6 +25,10 @@
 #include "PWM.h"
 #include "UART.h"
 
+#include "Bordage_voile.h"
+#include "Communication.h"
+
+
 #define valeur_critique_chavirement 1620
 
 void  SystemClock_Config(void);
@@ -39,6 +43,8 @@ void  SystemClock_Config(void);
 	
 	int res = 2000 ; 					//moitié de la pleine échelle de l'ADC
 	int compteur_ADC = 0 ;
+	int compteur_voile = 0;
+	int compteur_emetteur = 0;
 	
 
 int main(void)
@@ -49,10 +55,15 @@ int main(void)
 
 
 	/* Configure l'adc sur la voie en argument */
-	configure_adc1_single(8); 	//brancher le potentiomètre sur PB0
-	PWM_OUT_Conf(TIM2); 				//PWM en sortie sur PA1 si TIM2, sur PB8 si TIM4
-	PWM_Output_Pulse(TIM2,50);
+	//configure_adc1_single(8); 	//brancher le potentiomètre sur PB0
+	//PWM_OUT_Conf(TIM2); 				//PWM en sortie sur PA1 si TIM2, sur PB8 si TIM4
+	//PWM_Output_Pulse(TIM2,50);
  
+	
+	USART1_Conf();
+	
+	envoi_donnee('a');
+	
   while (1)
   {
 		//tâche de fond : transmission USART
@@ -138,7 +149,24 @@ void SysTick_Handler(void)  {   //le systick déborde toutes les 1ms
 	//PWM_Output_Pulse(TIM4,10); 									//commande pour border les voiles à 90°
 	//}
 
+	
+/* gestion du bordage de la voile , tous les 20 ms*/
+
+	compteur_voile ++ ;
+	if (compteur_voile==20) {
+		compteur_voile=0;
+		Asservissement_voile();
+	}
+	/* gestion de l'emetteur RF , tous les 3 s*/
+	compteur_emetteur ++ ;
+	if (compteur_emetteur==3000) {
+		compteur_emetteur=0;
+		Envoi_Etat_Voiles();
+	}
+	
+	
 /* gestion du bordage */
+
 	
 /* gestion de la batterie, tous les ... ms*/
 	
