@@ -1,10 +1,9 @@
 # keil
-
+*.axf
 *.crf
 *.htm
 *.lst
 *.dep
-Project.uvoptx
 Project.uvguix.*
 
 # Prerequisites
