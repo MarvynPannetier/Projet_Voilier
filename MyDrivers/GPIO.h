@@ -6,6 +6,13 @@
 
 // -------------------------- Gestion de l'index de la girouette -------------------------------// 
 
+
+
+void GPIO_input_conf(GPIO_TypeDef *GPIOx, uint32_t pin, uint32_t mode) ;
+
+void GPIO_output_conf(GPIO_TypeDef *GPIOx, uint32_t pin , uint32_t mode, uint32_t speed,uint32_t output_type) ;
+
+
 /**
 	* @brief  Configuration de l'IO PA5 en Floating input pour la gestion de l'index de la girouette 
   * @note   

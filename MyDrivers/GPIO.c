@@ -19,8 +19,29 @@
 	* @param  Aucun
   * @retval Aucun
   */
+void GPIO_input_conf(GPIO_TypeDef *GPIOx, uint32_t pin, uint32_t mode)
+{
+	LL_GPIO_InitTypeDef My_LL_GPIO; 
 	
+	My_LL_GPIO.Pin= pin ;
+	My_LL_GPIO.Mode = mode;
+		
+	LL_GPIO_Init(GPIOx, &My_LL_GPIO);
+}
 	
+void GPIO_output_conf(GPIO_TypeDef *GPIOx, uint32_t pin , uint32_t mode, uint32_t speed,uint32_t output_type)
+{
+		LL_GPIO_InitTypeDef My_LL_GPIO; 					// initialisation de la structure de type LL_GPIO_InitTypeDef 
+		
+		// Configuration en output Alternate PushPull --> Port A Pin 2 --> fréquence 20kHz
+		My_LL_GPIO.Pin=pin;
+		My_LL_GPIO.Mode = mode;
+		My_LL_GPIO.OutputType = output_type;
+		My_LL_GPIO.Speed= speed ;
+		
+		LL_GPIO_Init(GPIOx, &My_LL_GPIO);
+}
+
 void Index_Conf_io() {
 		
 	LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOA); // activation de la clock du périphérique du port A lié à APB2

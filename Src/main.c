@@ -39,6 +39,8 @@ void  SystemClock_Config(void);
 	
 	int res = 2000 ; 					//moitié de la pleine échelle de l'ADC
 	int compteur_ADC = 0 ;
+	int compteur_ADC2 = 0 ;
+	
 	
 
 int main(void)
@@ -49,9 +51,11 @@ int main(void)
 
 
 	/* Configure l'adc sur la voie en argument */
-	configure_adc1_single(8); 	//brancher le potentiomètre sur PB0
+	configure_adc1_single(8); 
+  configure_adc2_single(8);	//brancher le potentiomètre sur PB0
 	PWM_OUT_Conf(TIM2); 				//PWM en sortie sur PA1 si TIM2, sur PB8 si TIM4
 	PWM_Output_Pulse(TIM2,50);
+	
  
   while (1)
   {
@@ -128,11 +132,12 @@ void SysTick_Handler(void)  {   //le systick déborde toutes les 1ms
 	
 /* gestion du chavirement, tous les 100ms*/
 	compteur_ADC ++ ;
+	compteur_ADC2 ++ ; 
 	if (compteur_ADC==100) {
 		compteur_ADC=0;
-		res = convert_single() ; 			// conversion de la voie sélectionnée dans config ADC
+		res = convert_single1() ; 			// conversion de la voie sélectionnée dans config ADC
 		PWM_Output_Pulse(TIM2,100*res/0xFFF);
-	}
+	
 	//while(res < valeur_critique_chavirement){ 	//on rentre dans la boucle si on est en train de chavirer
 	//envoi_donnee('c'); 
 	//PWM_Output_Pulse(TIM4,10); 									//commande pour border les voiles à 90°
@@ -142,6 +147,12 @@ void SysTick_Handler(void)  {   //le systick déborde toutes les 1ms
 	
 /* gestion de la batterie, tous les ... ms*/
 	
+	if (compteur_ADC2==1000) {
+		compteur_ADC2=0;
+		res = convert_single2() ; 			// conversion de la voie sélectionnée dans config ADC
+		PWM_Output_Pulse(TIM2,100*res/0xFFF);
+	}
+}
 /* gestion de ... , tous les 100 ms*/
 	
 }

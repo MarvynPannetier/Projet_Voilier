@@ -24,6 +24,27 @@ void (*Ptr_ItFct_TIM3)(void);
 void (*Ptr_ItFct_TIM4)(void); 
 
 
+void Conf_Input_Capture()
+{
+	//Configuration TIM INPUT CAPTURE
+	TIM4->CCMR1 |= (1<<0);    
+	TIM4->CCMR1 &= ~(1<<1);  
+	
+	TIM4->CCER &= ~(1<<1);
+	
+	TIM4->CCMR1 |= (1<<9);
+	TIM4->CCMR1 &= ~(1<<8);
+	
+	TIM4->CCER |= (1<<5);
+	
+	TIM4->SMCR |= ((1<<4)|(1<<6));
+	TIM4->SMCR &= ~(1<<5);
+	
+	TIM4->SMCR |=(1<<2);
+	TIM4->SMCR &= ((1<<0)|(1<<1));
+	
+	TIM4->CCER |=((1<<0)|(1<<4));
+}
 
 
 /**
