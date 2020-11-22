@@ -27,9 +27,8 @@
 
 #include "Bordage_voile.h"
 #include "Communication.h"
+#include "Securite.h"
 
-
-#define valeur_critique_chavirement 1620
 
 void  SystemClock_Config(void);
 
@@ -142,19 +141,13 @@ void SysTick_Handler(void)  {   //le systick déborde toutes les 1ms
 	compteur_ADC ++ ;
 	if (compteur_ADC==100) {
 		compteur_ADC=0;
-		res = convert_single() ; 			// conversion de la voie sélectionnée dans config ADC
-		PWM_Output_Pulse(TIM2,100*res/0xFFF);
+		gestion_chavirement();
 	}
-	//while(res < valeur_critique_chavirement){ 	//on rentre dans la boucle si on est en train de chavirer
-	//envoi_donnee('c'); 
-	//PWM_Output_Pulse(TIM4,10); 									//commande pour border les voiles à 90°
-	//}
-
 	
-/* gestion du bordage de la voile , tous les 20 ms*/
+/* gestion du bordage de la voile , tous les 200 ms*/
 
 	compteur_voile ++ ;
-	if (compteur_voile==20) {
+	if (compteur_voile==200) {
 		compteur_voile=0;
 		Asservissement_voile();
 	}
@@ -164,9 +157,6 @@ void SysTick_Handler(void)  {   //le systick déborde toutes les 1ms
 		compteur_emetteur=0;
 		Envoi_Etat_Voiles();
 	}
-	
-	
-/* gestion du bordage */
 
 	
 /* gestion de la batterie, tous les ... ms*/
