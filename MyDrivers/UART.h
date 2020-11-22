@@ -18,6 +18,7 @@ void USART1_Conf_io(void);
 
 
 
+
 /**
 	* @brief  Configuration de l'USART1
   * @note   baud rate = 9600 , 8 bits de données,1 bit de stop
@@ -26,6 +27,7 @@ void USART1_Conf_io(void);
   */
 	
 	void USART1_Conf(void);
+	
 	
 	
 	
