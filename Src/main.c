@@ -19,7 +19,7 @@
 #include "stm32f1xx_ll_rcc.h" // utile dans la fonction SystemClock_Config
 #include "stm32f1xx_ll_utils.h"   // utile dans la fonction SystemClock_Config
 #include "stm32f1xx_ll_system.h" // utile dans la fonction SystemClock_Config
-
+#include "stm32f1xx_ll_tim.h" 
 
 #include "ADC.h"
 #include "PWM.h"
@@ -27,9 +27,8 @@
 
 #include "Bordage_voile.h"
 #include "Communication.h"
+#include "Securite.h"
 
-
-#define valeur_critique_chavirement 1620
 
 void  SystemClock_Config(void);
 
@@ -62,7 +61,7 @@ int main(void)
 
 	configure_adc1_single(8); 
   configure_adc2_single(8);	//brancher le potentiomètre sur PB0
-	PWM_OUT_Conf(TIM2); 				//PWM en sortie sur PA1 si TIM2, sur PB8 si TIM4
+	PWM_OUT_Conf(TIM2,LL_TIM_CHANNEL_CH2,5); 				//PWM en sortie sur PA1 si TIM2, sur PB8 si TIM4
 	PWM_Output_Pulse(TIM2,50);
 	
   USART1_Conf();
@@ -154,12 +153,14 @@ void SysTick_Handler(void)  {   //le systick déborde toutes les 1ms
 	//envoi_donnee('c'); 
 	//PWM_Output_Pulse(TIM4,10); 									//commande pour border les voiles à 90°
 	//}
+		gestion_chavirement();
+	}
 
 	
-/* gestion du bordage de la voile , tous les 20 ms*/
+/* gestion du bordage de la voile , tous les 200 ms*/
 
 	compteur_voile ++ ;
-	if (compteur_voile==20) {
+	if (compteur_voile==200) {
 		compteur_voile=0;
 		Asservissement_voile();
 	}
@@ -169,9 +170,6 @@ void SysTick_Handler(void)  {   //le systick déborde toutes les 1ms
 		compteur_emetteur=0;
 		Envoi_Etat_Voiles();
 	}
-	
-	
-/* gestion du bordage */
 
 	
 /* gestion de la batterie, tous les ... ms*/
@@ -184,7 +182,7 @@ void SysTick_Handler(void)  {   //le systick déborde toutes les 1ms
 }
 /* gestion de ... , tous les 100 ms*/
 	
-}
+
 
 
 

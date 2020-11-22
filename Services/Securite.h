@@ -1,5 +1,12 @@
-Sécurité.h
+//Sécurité.h
 
--> include ADC
--> include PWM
+#include "ADC.h" 
+#include "PWM.h"
+#include "UART.h" 
+
+void gestion_chavirement(void) ;
+
+
+
+
 

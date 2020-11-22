@@ -2,19 +2,11 @@
 
 
 #include "Bordage_voile.h"
+#include "stm32f1xx_ll_tim.h" 
+#include "stm32f1xx_ll_gpio.h"
+#include "stm32f1xx_ll_bus.h" 
+#include "stm32f1xx_ll_exti.h"
 
-
-
-
-
-
-/**
-	* @brief  Reset et démarrage du Timer 3 
-  * @note   Fonction appelée quand l'index est détecté --> au déclenchement de l'interruption correspondante
-	* @param  None
-  * @retval None
-  */
-	
 	
 	
 void Demarrage_Timer() {
@@ -40,12 +32,30 @@ void Demarrage_Timer() {
 void Girouette_Conf() {
 	
 	// Configuration du PWM Output
-	PWM_OUT_Conf(TIM4);
+	PWM_OUT_Conf(TIM4,LL_TIM_CHANNEL_CH3,5);
 	
 	// configuration du timer en mode encoder associé aux voies A et B de la girouette
-	Encoder_Conf();
+	LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOA)
+	
+	// 1- Configurer GPIO en floating input 
+	GPIO_input_conf(GPIOA, LL_GPIO_PIN_6, LL_GPIO_MODE_FLOATING, LL_GPIO_SPEED_FREQ_MEDIUM);
+	GPIO_input_conf(GPIOA, LL_GPIO_PIN_7, LL_GPIO_MODE_FLOATING, LL_GPIO_SPEED_FREQ_MEDIUM);
+	
+	// 2- Activation de la clock du timer 3
+	LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM3);
+	
+	// 3- Configurer les valeurs ARR (=360) et PSC(=0) du Timer --> utilisation de la fonction My_Timer_Conf
+	MyTimer_Conf(TIM3,359,0);
+	
+	Encoder_Conf_Timer();
 	
 	// configuration de l'entrée associé à l'index 
+	GPIO_input_conf(GPIOA, LL_GPIO_PIN_5, LL_GPIO_MODE_FLOATING, LL_GPIO_SPEED_FREQ_MEDIUM);
+	
+	
+  //configuration de l'interruption de index
+	
+	
 	Index_Conf(Demarrage_Timer);
 	
 	
@@ -53,13 +63,11 @@ void Girouette_Conf() {
 }
 
 
+	
+}
 
-/**
-	* @brief  On exprime pulse en fonction de la valeur de l'angle de la girouette 
-  * @note   Fonction à appeler en argument de la fonction PWM_Out_Pulse
-	* @param  int Alpha : valeur de l'angle mesuré par la girouette = direction du vent
-	* @retval int Pulse : valeur du duty cycle de la PWM du servo moteur
-  */
+
+
 
 
 int Calcul_duty_cycle(int alpha) {
@@ -93,4 +101,6 @@ void Asservissement_voile() {
 	PWM_Output_Pulse(TIM4, Calcul_duty_cycle(TIM3->CNT));
 	
 }
+
+
 

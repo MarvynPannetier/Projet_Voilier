@@ -1,6 +1,9 @@
 #include "stm32f103xb.h" 
 #include "MyTimer.h"
 
+
+void PWM_Output_Conf_TIM(TIM_TypeDef * Timer,uint32_t Channel);
+
 /**
 	* @brief  Configuration des IO en Output alternate Push-Pull
   * @note   Pour les pins PA1 = TIM2_CH2 pour le moteur CC ou PB8 = TIM4_CH3 pour le servo moteur
@@ -20,7 +23,7 @@ void PWM_OUT_Conf_io(TIM_TypeDef * Timer);
   */
 
 
-void PWM_Output_Conf_TIM(TIM_TypeDef * Timer);
+void PWM_Output_Conf_TIM(TIM_TypeDef * Timer,  uint32_t Channel);
 
 /**
 	* @brief  Configuration de la valeur du duty cycle
@@ -40,5 +43,5 @@ void PWM_Output_Pulse(TIM_TypeDef * Timer, int pulse);
 	* @param  TIM_TypeDef Timer : indique le timer à configurer TIM2 ou TIM4
   * @retval Aucun
   */
+void PWM_OUT_Conf(TIM_TypeDef * Timer, uint32_t Channel,int pulse);
 
-void PWM_OUT_Conf(TIM_TypeDef * Timer);

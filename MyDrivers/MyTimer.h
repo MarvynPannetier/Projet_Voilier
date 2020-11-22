@@ -11,7 +11,7 @@ Driver pour Timer 1 à 4 du STM32F103RB
 #include "stm32f103xb.h" 
 
 
-void Conf_Input_Capture();
+void Conf_Input_Capture(void);
 
 /**
 	* @brief  Active l'horloge et règle l'ARR et le PSC du timer visé

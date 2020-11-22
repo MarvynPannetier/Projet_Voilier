@@ -74,24 +74,11 @@ void PWM_OUT_Conf_io(TIM_TypeDef * Timer) {
   */
 
 
-void PWM_Output_Conf_TIM(TIM_TypeDef * Timer) {
+void PWM_Output_Conf_TIM(TIM_TypeDef *Timer, uint32_t Channel) {
 		
-	if (Timer == TIM2) {	// moteur CC
-		
-	//CONFIGURATION DE LA PWN (OUTPUT CHANNEL 2)
-		LL_TIM_CC_EnableChannel(Timer,LL_TIM_CHANNEL_CH2);
-		LL_TIM_OC_SetMode(Timer,LL_TIM_CHANNEL_CH2,LL_TIM_OCMODE_PWM1);
-	} 
-	
-	
-	if (Timer == TIM4) {	// servo moteur
-		
-	//CONFIGURATION DE LA PWN (OUTPUT CHANNEL 3)
-		LL_TIM_CC_EnableChannel(Timer,LL_TIM_CHANNEL_CH3); 
-		LL_TIM_OC_SetMode(Timer,LL_TIM_CHANNEL_CH3,LL_TIM_OCMODE_PWM1);	
-	}
-	
-	
+		LL_TIM_CC_EnableChannel(Timer,Channel);
+		LL_TIM_OC_SetMode(Timer,Channel,LL_TIM_OCMODE_PWM1);
+	 	
 }
 
 
@@ -126,19 +113,19 @@ void PWM_Output_Pulse(TIM_TypeDef * Timer, int pulse) {
   */
 	
 	
-void PWM_OUT_Conf(TIM_TypeDef * Timer) {
-	
+void PWM_OUT_Conf(TIM_TypeDef * Timer, uint32_t Channel,int pulse)
+	{	
 	// Configuration de l'IO en Output PushPull
-	PWM_OUT_Conf_io(Timer);
+//	PWM_OUT_Conf_io(Timer);
 	
 	// Configuration du timer avec une periode de 20ms/fréquence de 20khz
-	MyTimer_Conf(Timer, 3599, 0);
+//	MyTimer_Conf(Timer, 3599, 0);
 	
 	// Configuration du Timer en mode PWM
-	PWM_Output_Conf_TIM(Timer);
+	PWM_Output_Conf_TIM(Timer, Channel);
 	
 	// Configuration du rapport cyclique
-	PWM_Output_Pulse(Timer, 5);
+	PWM_Output_Pulse(Timer, pulse);
 	
 	// Active le timer
 	MyTimer_Start(Timer);
