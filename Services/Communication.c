@@ -42,7 +42,7 @@ void gestion_batterie() {
 
 void config_batterie()
 {
-  GPIO_input_conf(GPIOC, LL_GPIO_PIN_2 ,LL_GPIO_MODE_ANALOG,LL_GPIO_SPEED_FREQ_LOW); //PC2 en analog input
+  GPIO_input_conf(GPIOC, LL_GPIO_PIN_2 ,LL_GPIO_MODE_ANALOG); //PC2 en analog input
 	configure_adc2_single(5);
 }
 

@@ -132,8 +132,8 @@ void Encoder_Conf() {
 
 
   //1- Configurer GPIO ENCODER en floating input 
-	GPIO_input_conf(GPIOA, LL_GPIO_PIN_6, LL_GPIO_MODE_FLOATING, LL_GPIO_SPEED_FREQ_MEDIUM);
-	GPIO_input_conf(GPIOA, LL_GPIO_PIN_7, LL_GPIO_MODE_FLOATING, LL_GPIO_SPEED_FREQ_MEDIUM);
+	GPIO_input_conf(GPIOA, LL_GPIO_PIN_6, LL_GPIO_MODE_FLOATING);
+	GPIO_input_conf(GPIOA, LL_GPIO_PIN_7, LL_GPIO_MODE_FLOATING);
 	
   // 2- Activation de la clock du timer 3
 	LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM3);
@@ -158,7 +158,7 @@ void Encoder_Conf() {
 void Index_Conf(void (*IT_function)(void)) {
 	
 	// Configuration des entrées et des sorties
-	GPIO_input_conf(GPIOA, LL_GPIO_PIN_5, LL_GPIO_MODE_FLOATING, LL_GPIO_SPEED_FREQ_MEDIUM);
+	GPIO_input_conf(GPIOA, LL_GPIO_PIN_5, LL_GPIO_MODE_FLOATING);
 	
 	// Réglage interruption du Timer avec callback : 
 	Index_IT_Conf(IT_function,1);

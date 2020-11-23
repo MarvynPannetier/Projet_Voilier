@@ -11,7 +11,7 @@ void config_orientation(void)
 // Configuration en input --> Port B Pin 6 
 	
 	//conf PB6 pour recevoir la pwm de la télécommande 
-	GPIO_input_conf(GPIOB , LL_GPIO_PIN_6 , LL_GPIO_MODE_INPUT,LL_GPIO_SPEED_FREQ_LOW);
+	GPIO_input_conf(GPIOB , LL_GPIO_PIN_6 , LL_GPIO_MODE_INPUT);
 	//conf PA2 pour indiquer le sens de rotation
   GPIO_output_conf(GPIOA, LL_GPIO_PIN_2 , LL_GPIO_MODE_ALTERNATE, LL_GPIO_SPEED_FREQ_LOW,LL_GPIO_OUTPUT_PUSHPULL) ;
 	//conf PA1 pour envoyer la PWM au Moteur CC

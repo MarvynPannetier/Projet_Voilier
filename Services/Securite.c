@@ -19,7 +19,7 @@ void gestion_chavirement() {
 
 
 void config_chavirement(){
-  GPIO_input_conf(GPIOB, LL_GPIO_PIN_0  ,LL_GPIO_MODE_ANALOG,LL_GPIO_SPEED_FREQ_LOW); //PB0 en analog input 
+  GPIO_input_conf(GPIOB, LL_GPIO_PIN_0  ,LL_GPIO_MODE_ANALOG); //PB0 en analog input 
 	configure_adc1_single(8);
 }
 

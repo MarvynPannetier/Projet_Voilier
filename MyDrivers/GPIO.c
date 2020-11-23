@@ -15,10 +15,9 @@
 	* @param  Aucun
   * @retval Aucun
   */
-void GPIO_input_conf(GPIO_TypeDef *GPIOx, uint32_t pin, uint32_t mode, uint32_t speed)
+void GPIO_input_conf(GPIO_TypeDef *GPIOx, uint32_t pin, uint32_t mode)
 {
 	LL_GPIO_SetPinMode(GPIOx,pin,mode);
-	LL_GPIO_SetPinSpeed(GPIOx,pin,speed);
 }
 	
 void GPIO_output_conf(GPIO_TypeDef *GPIOx, uint32_t pin , uint32_t mode, uint32_t speed, uint32_t output_type)
