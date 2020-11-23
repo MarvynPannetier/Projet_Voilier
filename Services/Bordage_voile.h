@@ -27,7 +27,7 @@ void Demarrage_Timer(void);
   */
 	
 	
-void Girouette_Conf(void);
+void config_girouette(void);
 
 
 /**

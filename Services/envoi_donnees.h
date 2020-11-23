@@ -7,7 +7,7 @@
   * @retval Aucun
   */
 	
-   void envoi_donnees_conf(void) ;
+   void config_envoi(void) ;
 	
 	
 	

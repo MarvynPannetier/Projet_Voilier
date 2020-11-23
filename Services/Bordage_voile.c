@@ -30,7 +30,7 @@ void Demarrage_Timer() {
   */
 	
 	
-void Girouette_Conf() {
+void config_girouette() {
 	
 	
 	

@@ -12,7 +12,7 @@
   * @retval Aucun
   */
 
-void envoi_donnees_conf() {
+void config_envoi(void) {
 	
 
 	//Configuration PA9 et PA11

@@ -5,7 +5,7 @@
 #include "stm32f1xx_ll_gpio.h"
 #include "orientation_plateau.h"
 
-void Orientation_Plateau_Config(void)
+void config_orientation(void)
 {
 	
 // Configuration en input --> Port B Pin 6 

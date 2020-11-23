@@ -41,12 +41,8 @@ void  SystemClock_Config(void);
   * @retval None
   */
 	
-	int res = 2000 ; 
-  int res2 = 2000 ;	//moitié de la pleine échelle de l'ADC
-	int compteur_ADC = 0 ;
-	int compteur_ADC2 = 0 ;
-	
-
+	int compteur_chavirement = 0 ;
+	int compteur_batterie = 0 ;
 	int compteur_voile = 0;
 	int compteur_emetteur = 0;
 
@@ -80,15 +76,11 @@ int main(void)
 	// activation de la clock du périphérique du port A lié à APB1
 		LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_USART1); 
 	
-	Girouette_Conf(); 
-	
-	Orientation_Plateau_Config();
-	
-	conf_adc_chavirement(8);
-	
-	conf_adc_batterie(5);
-	
-	envoi_donnees_conf() ;
+	config_girouette(); 
+	config_orientation();
+	config_chavirement();
+	config_batterie();
+	config_envoi() ;
 	
 	
 	
@@ -99,10 +91,6 @@ int main(void)
 		//tâche de fond : transmission USART
   }
 }
-
-
-
-
 
 
 
@@ -168,40 +156,35 @@ void SystemClock_Config(void)
 void SysTick_Handler(void)  {   //le systick déborde toutes les 1ms                         
 	
 /* gestion du chavirement, tous les 100ms*/
-	compteur_ADC ++ ;
-	compteur_ADC2 ++ ; 
-	if (compteur_ADC==100) {
-		compteur_ADC=0;
-		res = convert_single1() ; 			// conversion de la voie sélectionnée dans config ADC
-		//PWM_Output_Pulse(TIM2,100*res/0xFFF);
-		gestion_chavirement(res);
+	compteur_chavirement ++ ; 
+	if (compteur_chavirement==100) {
+		compteur_chavirement=0;
+		gestion_chavirement();
 	}
-
 	
 /* gestion du bordage de la voile , tous les 200 ms*/
-
 	compteur_voile ++ ;
 	if (compteur_voile==200) {
 		compteur_voile=0;
 		Asservissement_voile();
 	}
+	
 	/* gestion de l'emetteur RF , tous les 3 s*/
 	compteur_emetteur ++ ;
 	if (compteur_emetteur==3000) {
 		compteur_emetteur=0;
 		Envoi_Etat_Voiles();
 	}
-
 	
 /* gestion de la batterie, tous les secondes*/
 	
-	if (compteur_ADC2==1000) {
-		compteur_ADC2=0;
-		res2 = convert_single2() ; 			// conversion de la voie sélectionnée dans config ADC
-		gestion_batterie(res2);
+	compteur_batterie ++ ;
+	if (compteur_batterie==1000) {
+		compteur_batterie=0;
+		gestion_batterie();
 	}
 }
-/* gestion de ... , tous les 100 ms*/
+
 	
 
 
