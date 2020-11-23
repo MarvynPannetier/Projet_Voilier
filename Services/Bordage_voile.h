@@ -48,3 +48,13 @@ int Calcul_duty_cycle(int alpha);
   */
 
 void Asservissement_voile(void);
+
+
+/**
+	* @brief  Configuration de la PWM Output
+  * @note   Pour les pins PA1 = TIM2_CH2 pour le moteur CC ou PB8 = TIM4_CH3 pour le servo moteur
+	* @param  TIM_TypeDef Timer : indique le timer à configurer TIM2 ou TIM4
+  * @retval Aucun
+  */
+	
+void PWM_OUT_bordage(TIM_TypeDef * Timer, uint32_t Channel,int pulse);

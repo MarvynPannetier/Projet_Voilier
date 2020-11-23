@@ -1,13 +1,9 @@
 #include "ADC.h"
-#include "GPIO.h"
-#include "stm32f1xx_ll_bus.h"
-#include "stm32f1xx_ll_gpio.h"
 
 void configure_adc1_single(int v) {
 		//config du port de l'acceleromètre branché sur ...
-		RCC->APB2ENR |= RCC_APB2ENR_IOPBEN;
+
 	
-	 // GPIO_input_conf(GPIOB, LL_GPIO_PIN_0  ,LL_GPIO_MODE_ANALOG); //PB0 en analog input
 		//config de l'ADC
 		RCC->APB2ENR |= RCC_APB2ENR_ADC1EN; 	// validation horloge ADC1
     RCC->CFGR |= RCC_CFGR_ADCPRE_DIV6; 		// passage de l'horloge ADC1 à 12MHz
@@ -20,12 +16,11 @@ void configure_adc1_single(int v) {
 
 void configure_adc2_single(int v) {
 		//config du port de l'acceleromètre branché sur ...
-		RCC->APB2ENR |= RCC_APB2ENR_IOPBEN;
-   //  GPIO_input_conf(GPIOC, 2 ,LL_GPIO_MODE_ANALOG); //PC2 en analog input
+		
 		//config de l'ADC
-		RCC->APB2ENR |= RCC_APB2ENR_ADC2EN; 	// validation horloge ADC1
-    RCC->CFGR |= RCC_CFGR_ADCPRE_DIV6; 		// passage de l'horloge ADC1 à 12MHz
-    ADC2->CR2|= ADC_CR2_ADON; 						// démarrage ADC1
+		RCC->APB2ENR |= RCC_APB2ENR_ADC2EN; 	// validation horloge ADC2
+    RCC->CFGR |= RCC_CFGR_ADCPRE_DIV6; 		// passage de l'horloge ADC2 à 12MHz
+    ADC2->CR2|= ADC_CR2_ADON; 						// démarrage ADC2
     ADC2->SQR1&= ADC_SQR1_L; 							// fixe le nombre de conversions à 1
     ADC2->SQR3|= v; 											// indique la voie à convertir
     ADC2->CR2 |= ADC_CR2_CAL; 						// debut de la calibration

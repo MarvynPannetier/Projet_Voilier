@@ -1,10 +1,7 @@
 //ENCODER;
 
 #include "ENCODER.h"
-
 #include "stm32f1xx_ll_tim.h"
-#include "stm32f1xx_ll_gpio.h"
-#include "stm32f1xx_ll_bus.h" // Pour l'activation des horloges
 
 // Configuration mode ENCODER
 // 1- Configurer GPIO en floating input 

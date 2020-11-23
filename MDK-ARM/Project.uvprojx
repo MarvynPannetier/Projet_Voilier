@@ -398,11 +398,6 @@
               <FilePath>..\Services\Bordage_voile.c</FilePath>
             </File>
             <File>
-              <FileName>Chrono.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Services\Chrono.c</FilePath>
-            </File>
-            <File>
               <FileName>Communication.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Services\Communication.c</FilePath>
@@ -416,6 +411,11 @@
               <FileName>Securite.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Services\Securite.c</FilePath>
+            </File>
+            <File>
+              <FileName>envoi_donnees.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Services\envoi_donnees.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -455,7 +455,7 @@
             <File>
               <FileName>Index.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Index.c</FilePath>
+              <FilePath>..\MyDrivers\Index.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -911,11 +911,6 @@
               <FilePath>..\Services\Bordage_voile.c</FilePath>
             </File>
             <File>
-              <FileName>Chrono.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Services\Chrono.c</FilePath>
-            </File>
-            <File>
               <FileName>Communication.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Services\Communication.c</FilePath>
@@ -929,6 +924,11 @@
               <FileName>Securite.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Services\Securite.c</FilePath>
+            </File>
+            <File>
+              <FileName>envoi_donnees.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Services\envoi_donnees.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -968,7 +968,7 @@
             <File>
               <FileName>Index.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Index.c</FilePath>
+              <FilePath>..\MyDrivers\Index.c</FilePath>
             </File>
           </Files>
         </Group>

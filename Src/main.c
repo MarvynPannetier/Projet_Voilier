@@ -20,11 +20,12 @@
 #include "stm32f1xx_ll_utils.h"   // utile dans la fonction SystemClock_Config
 #include "stm32f1xx_ll_system.h" // utile dans la fonction SystemClock_Config
 #include "stm32f1xx_ll_tim.h" 
+#include "stm32f1xx_ll_gpio.h"
+#include "stm32f1xx_ll_bus.h" 
 
-#include "ADC.h"
-#include "PWM.h"
-#include "UART.h"
 
+#include "orientation_plateau.h"
+#include "envoi_donnees.h"
 #include "Bordage_voile.h"
 #include "Communication.h"
 #include "Securite.h"
@@ -40,7 +41,8 @@ void  SystemClock_Config(void);
   * @retval None
   */
 	
-	int res = 2000 ; 					//moitié de la pleine échelle de l'ADC
+	int res = 2000 ; 
+  int res2 = 2000 ;	//moitié de la pleine échelle de l'ADC
 	int compteur_ADC = 0 ;
 	int compteur_ADC2 = 0 ;
 	
@@ -48,28 +50,52 @@ void  SystemClock_Config(void);
 	int compteur_voile = 0;
 	int compteur_emetteur = 0;
 
-	
-
+/*J'ai réorganisé chaque couche : 
+-dans chacunes aucun fichier n'est dépendant de l'autre, ils sont tous en parallèles
+-j'ai donc laissé dans la couche que les fonctions essentielles 
+-dans la couche services,j'ai recombiné les fonctions de la couche driver pour pouvoir configurer chacunes des parties
+-dans la couche services, il y a aussi nos fonctions de traitement qui sont appelées dans la boucle while du main ou dans les interuption SYSTICK
+-dans le main, j'ai commencé par appeler toutes les fonctions de configuration. Le but étant qu'on ne reconfigure pas à chaque fois qu'on utilise un périph 
+-Si une pin change le jour du test il faut donc juste modifier les arguments de ces fonctions au début du main
+-j'ai activé la clock des GPIO en dehors des fonctions de conf pour éviter de l'activer dans chaque fonction comme tout le monde s'en sert
+-enfin j'ai rajouté notre partie à Thomas et moi dans le main, je l'ai mis dans le while et non dans le systick pour etre à l'écoute de la télécommande 
+-Idéalement il ne reste plus qu'à tester tout ça 
+-ATTENTION : ne pas push de version test, git va vouloir recombiner et ça va demander du travail à la main, pour enlever les lignes de test par exemple
+-Push uniquement si la version actuelle à des problèmes(ce qui est quand même probable), pour la modifier, mais sur git on ne met que des versions améliorées de celle-ci et qui fonctionnent maintenant
+-j'ai aussi fait le tour pas mal de fois de chaque fichier pour enlever les includes inutiles par exemple  
+*/
 int main(void)
 {
-  /* Configure the system clock to 72 MHz */
+
+	  /* Configure the system clock to 72 MHz */
 	SystemClock_Config();
 	SysTick->CTRL |= (1<<1); //autorise interruption
-
-
-	/* Configure l'adc sur la voie en argument */
-
-	configure_adc1_single(8); 
-  configure_adc2_single(8);	//brancher le potentiomètre sur PB0
-	PWM_OUT_Conf(TIM2,LL_TIM_CHANNEL_CH2,5); 				//PWM en sortie sur PA1 si TIM2, sur PB8 si TIM4
-	PWM_Output_Pulse(TIM2,50);
 	
-  USART1_Conf();
-	envoi_donnee('a');
+	
+	// activation de la clock du périphérique du port A lié à APB2
+	// activation de la clock du périphérique du port B lié à APB2
+		LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOB);
+	  LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOA);
+	
+	// activation de la clock du périphérique du port A lié à APB1
+		LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_USART1); 
+	
+	Girouette_Conf(); 
+	
+	Orientation_Plateau_Config();
+	
+	conf_adc_chavirement(8);
+	
+	conf_adc_batterie(5);
+	
+	envoi_donnees_conf() ;
+	
 	
 	
   while (1)
   {
+		//on lance la focntion qui écoute la pwm envoyé par la télécommande et qui agit enconséquence
+		PWM_INPUT();
 		//tâche de fond : transmission USART
   }
 }
@@ -147,13 +173,8 @@ void SysTick_Handler(void)  {   //le systick déborde toutes les 1ms
 	if (compteur_ADC==100) {
 		compteur_ADC=0;
 		res = convert_single1() ; 			// conversion de la voie sélectionnée dans config ADC
-		PWM_Output_Pulse(TIM2,100*res/0xFFF);
-	
-	//while(res < valeur_critique_chavirement){ 	//on rentre dans la boucle si on est en train de chavirer
-	//envoi_donnee('c'); 
-	//PWM_Output_Pulse(TIM4,10); 									//commande pour border les voiles à 90°
-	//}
-		gestion_chavirement();
+		//PWM_Output_Pulse(TIM2,100*res/0xFFF);
+		gestion_chavirement(res);
 	}
 
 	
@@ -172,12 +193,12 @@ void SysTick_Handler(void)  {   //le systick déborde toutes les 1ms
 	}
 
 	
-/* gestion de la batterie, tous les ... ms*/
+/* gestion de la batterie, tous les secondes*/
 	
 	if (compteur_ADC2==1000) {
 		compteur_ADC2=0;
-		res = convert_single2() ; 			// conversion de la voie sélectionnée dans config ADC
-		PWM_Output_Pulse(TIM2,100*res/0xFFF);
+		res2 = convert_single2() ; 			// conversion de la voie sélectionnée dans config ADC
+		gestion_batterie(res2);
 	}
 }
 /* gestion de ... , tous les 100 ms*/

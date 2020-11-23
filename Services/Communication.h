@@ -1,11 +1,10 @@
 //Communication.h
 
-//-> include UART
-//-> include PWM
 
 #include "Bordage_voile.h"
 #include "UART.h"
 
+void conf_adc_batterie(int v);
 
 /**
 	* @brief  Calcul information bordage en cours
@@ -26,3 +25,7 @@ int Calcul_Etat_Voiles(void);
 
 void Envoi_Etat_Voiles(void);
 
+
+
+
+void gestion_batterie(float res);
