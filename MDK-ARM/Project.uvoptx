@@ -312,7 +312,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGDARM</Key>
-          <Name>(1010=73,145,449,702,0)(1007=-1,-1,-1,-1,0)(1008=-1,-1,-1,-1,0)(1009=-1,-1,-1,-1,0)(100=-1,-1,-1,-1,0)(110=-1,-1,-1,-1,0)(111=-1,-1,-1,-1,0)(1011=-1,-1,-1,-1,0)(180=-1,-1,-1,-1,0)(120=714,122,1135,549,1)(121=1119,122,1540,549,1)(122=729,148,1150,575,0)(123=-1,-1,-1,-1,0)(140=-1,-1,-1,-1,0)(240=700,154,1099,499,0)(190=-1,-1,-1,-1,0)(200=-1,-1,-1,-1,0)(170=-1,-1,-1,-1,0)(130=-1,-1,-1,-1,0)(131=925,9,1519,760,0)(132=616,0,1210,751,0)(133=826,77,1420,828,0)(160=898,37,1346,451,0)(161=236,107,684,521,0)(162=-1,-1,-1,-1,0)(210=-1,-1,-1,-1,0)(211=-1,-1,-1,-1,0)(220=-1,-1,-1,-1,0)(221=-1,-1,-1,-1,0)(230=-1,-1,-1,-1,0)(234=-1,-1,-1,-1,0)(231=-1,-1,-1,-1,0)(232=-1,-1,-1,-1,0)(233=-1,-1,-1,-1,0)(150=743,113,1346,864,0)(151=813,35,1416,786,0)</Name>
+          <Name>(1010=73,145,449,702,0)(1007=-1,-1,-1,-1,0)(1008=-1,-1,-1,-1,0)(1009=-1,-1,-1,-1,0)(100=-1,-1,-1,-1,0)(110=-1,-1,-1,-1,0)(111=-1,-1,-1,-1,0)(1011=-1,-1,-1,-1,0)(180=-1,-1,-1,-1,0)(120=1043,290,1464,717,0)(121=1027,150,1448,577,0)(122=729,148,1150,575,0)(123=-1,-1,-1,-1,0)(140=-1,-1,-1,-1,0)(240=700,154,1099,499,0)(190=-1,-1,-1,-1,0)(200=-1,-1,-1,-1,0)(170=-1,-1,-1,-1,0)(130=-1,-1,-1,-1,0)(131=882,42,1476,793,0)(132=616,0,1210,751,0)(133=826,77,1420,828,0)(160=898,37,1346,451,0)(161=236,107,684,521,0)(162=-1,-1,-1,-1,0)(210=-1,-1,-1,-1,0)(211=-1,-1,-1,-1,0)(220=-1,-1,-1,-1,0)(221=-1,-1,-1,-1,0)(230=-1,-1,-1,-1,0)(234=-1,-1,-1,-1,0)(231=-1,-1,-1,-1,0)(232=-1,-1,-1,-1,0)(233=-1,-1,-1,-1,0)(150=743,113,1346,864,0)(151=813,35,1416,786,0)</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -349,34 +349,66 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>161</LineNumber>
+          <LineNumber>23</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134219572</Address>
+          <Address>134223238</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\Services\Bordage_voile.c</Filename>
+          <Filename>C:\Users\arnau\Documents\INSA\4A\PÃ©riphÃ©riques\Projet Voilier git\projet_git\Services\envoi_donnees.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\NUCLEO_F103RB\../Services/Bordage_voile.c\161</Expression>
+          <Expression>\\NUCLEO_F103RB\../Services/envoi_donnees.c\23</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>135</LineNumber>
+          <LineNumber>70</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134219286</Address>
+          <Address>134223920</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
+          <Filename>C:\Users\arnau\Documents\INSA\4A\PÃ©riphÃ©riques\Projet Voilier git\projet_git\Src\main.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\NUCLEO_F103RB\../Src/main.c\70</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>135</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
           <Filename>..\Services\Bordage_voile.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\NUCLEO_F103RB\../Services/Bordage_voile.c\135</Expression>
+          <Expression></Expression>
+        </Bp>
+        <Bp>
+          <Number>3</Number>
+          <Type>0</Type>
+          <LineNumber>55</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>..\Src\main.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
         </Bp>
       </Breakpoint>
       <Tracepoint>
@@ -385,7 +417,7 @@
       <DebugFlag>
         <trace>0</trace>
         <periodic>1</periodic>
-        <aLwin>1</aLwin>
+        <aLwin>0</aLwin>
         <aCover>0</aCover>
         <aSer1>0</aSer1>
         <aSer2>0</aSer2>
