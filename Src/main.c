@@ -45,6 +45,7 @@ void  SystemClock_Config(void);
 	int compteur_batterie = 0 ;
 	int compteur_voile = 0;
 	int compteur_emetteur = 0;
+	int compteur_plateau = 0;
 
 /*J'ai réorganisé chaque couche : 
 -dans chacunes aucun fichier n'est dépendant de l'autre, ils sont tous en parallèles
@@ -86,8 +87,6 @@ int main(void)
 	
   while (1)
   {
-		//on lance la focntion qui écoute la pwm envoyé par la télécommande et qui agit enconséquence
-		PWM_INPUT();
 		//tâche de fond : transmission USART
   }
 }
@@ -182,6 +181,14 @@ void SysTick_Handler(void)  {   //le systick déborde toutes les 1ms
 	if (compteur_batterie==1000) {
 		compteur_batterie=0;
 		gestion_batterie();
+	}
+
+//gestion rotaion plateau toute les 100ms 	
+	
+	compteur_plateau ++ ;
+	if (compteur_plateau==100) {
+		compteur_plateau=0;
+		Rotation_plateau();
 	}
 }
 

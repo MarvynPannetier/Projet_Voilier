@@ -6,4 +6,4 @@ void PWM_OUT_plateau(TIM_TypeDef * Timer, uint32_t Channel,int pulse);
 
 void config_orientation(void);
 	
-void PWM_INPUT(void);
+void Rotation_plateau(void);

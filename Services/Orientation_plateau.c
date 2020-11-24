@@ -38,7 +38,7 @@ void config_orientation(void)
 
 
 
-void PWM_INPUT(){
+void Rotation_plateau(){
 	
 	int period ;
 	int duty ;
