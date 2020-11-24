@@ -417,6 +417,11 @@
               <FileType>1</FileType>
               <FilePath>..\Services\envoi_donnees.c</FilePath>
             </File>
+            <File>
+              <FileName>batterie.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Services\batterie.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -929,6 +934,11 @@
               <FileName>envoi_donnees.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Services\envoi_donnees.c</FilePath>
+            </File>
+            <File>
+              <FileName>batterie.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Services\batterie.c</FilePath>
             </File>
           </Files>
         </Group>

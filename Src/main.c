@@ -1,21 +1,4 @@
-/**
-  ******************************************************************************
-  * @file    Templates_LL/Src/main.c
-  * @author  MCD Application Team
-  * @brief   Main program body through the LL API
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
-  *
-  ******************************************************************************
-  */
+
 #include "stm32f1xx_ll_rcc.h" // utile dans la fonction SystemClock_Config
 #include "stm32f1xx_ll_utils.h"   // utile dans la fonction SystemClock_Config
 #include "stm32f1xx_ll_system.h" // utile dans la fonction SystemClock_Config
@@ -33,7 +16,7 @@
 
 void  SystemClock_Config(void);
 
-/* Private functions ---------------------------------------------------------*/
+//Déclaration des variables de l'ordonnanceur
 
 /**
   * @brief  Main program
@@ -41,6 +24,7 @@ void  SystemClock_Config(void);
   * @retval None
   */
 	
+//Déclaration des variables de l'ordonnanceur	
 	int compteur_chavirement = 0 ;
 	int compteur_batterie = 0 ;
 	int compteur_voile = 0;
@@ -61,26 +45,27 @@ void  SystemClock_Config(void);
 -Push uniquement si la version actuelle à des problèmes(ce qui est quand même probable), pour la modifier, mais sur git on ne met que des versions améliorées de celle-ci et qui fonctionnent maintenant
 -j'ai aussi fait le tour pas mal de fois de chaque fichier pour enlever les includes inutiles par exemple  
 */
+
 int main(void)
 {
 
-	  /* Configure the system clock to 72 MHz */
+	//configuration du systick pour interruption toutes les 1 ms
 	SystemClock_Config();
 	SysTick->CTRL |= (1<<1); //autorise interruption
 	
-	
 	// activation de la clock du périphérique du port A lié à APB2
 	// activation de la clock du périphérique du port B lié à APB2
-		LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOB);
-	  LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOA);
+	LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOB);
+	LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOA);
 	
 	// activation de la clock du périphérique du port A lié à APB1
-		LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_USART1); 
+	LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_USART1); 
 	
+	// configuration des fonctions de service
 	config_girouette(); 
 	config_orientation();
-	config_chavirement();
-	config_batterie();
+	config_chavirement(8);
+	config_batterie(12);
 	config_envoi() ;
 	
 	
@@ -91,8 +76,7 @@ int main(void)
   }
 }
 
-
-
+	
 /**
   * @brief  System Clock Configuration
   *         The system Clock is configured as follow :
@@ -149,7 +133,6 @@ void SystemClock_Config(void)
 }
 
 
-
 /* ==============   INTERUPTION SYSTICK = ORDONANCEUR          ============== */
 
 void SysTick_Handler(void)  {   //le systick déborde toutes les 1ms                         
@@ -191,11 +174,6 @@ void SysTick_Handler(void)  {   //le systick déborde toutes les 1ms
 		Rotation_plateau();
 	}
 }
-
-	
-
-
-
 
 /* ==============   BOARD SPECIFIC CONFIGURATION CODE END      ============== */
 

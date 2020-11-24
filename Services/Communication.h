@@ -4,7 +4,7 @@
 #include "Bordage_voile.h"
 #include "UART.h"
 
-void config_batterie(void);
+void config_batterie(int v);
 
 /**
 	* @brief  Calcul information bordage en cours

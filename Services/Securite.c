@@ -2,7 +2,7 @@
 #include "Securite.h" 
 #include "GPIO.h"
 #include "stm32f1xx_ll_gpio.h"
-#include "envoi_donnees.h"
+#include "UART.h"
 
 #define valeur_critique_chavirement 1620
 
@@ -18,8 +18,8 @@ void gestion_chavirement() {
 }
 
 
-void config_chavirement(){
+void config_chavirement(int v){
   GPIO_input_conf(GPIOB, LL_GPIO_PIN_0  ,LL_GPIO_MODE_ANALOG); //PB0 en analog input 
-	configure_adc1_single(8);
+	configure_adc1_single(v);
 }
 

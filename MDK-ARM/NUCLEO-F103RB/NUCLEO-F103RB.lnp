@@ -5,6 +5,7 @@
 "nucleo-f103rb\orientation_plateau.o"
 "nucleo-f103rb\securite.o"
 "nucleo-f103rb\envoi_donnees.o"
+"nucleo-f103rb\batterie.o"
 "nucleo-f103rb\adc.o"
 "nucleo-f103rb\encoder.o"
 "nucleo-f103rb\gpio.o"

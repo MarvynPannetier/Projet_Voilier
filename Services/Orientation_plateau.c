@@ -63,7 +63,7 @@ void Rotation_plateau(){
 	} 	
   
 	//on envoie une PWM avec un duty cycle qui dépend de Timp pour que la vitesse varie 
-	PWM_OUT_plateau(TIM2,LL_TIM_CHANNEL_CH2,vitesse);
+	PWM_OUT_plateau(TIM2,LL_TIM_CHANNEL_CH2,vitesse); 
 }
 
 void PWM_OUT_plateau(TIM_TypeDef * Timer, uint32_t Channel,int pulse)

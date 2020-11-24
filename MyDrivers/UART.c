@@ -1,5 +1,4 @@
 //UART;
-//UART;
 #include "UART.h"
 #include "stm32f1xx_ll_bus.h" // Pour l'activation des horloges
 #include "stm32f1xx_ll_gpio.h"
@@ -41,4 +40,22 @@
 	}
 
 	
+/**
+	* @brief  envoi de la donnée par l'USART1 et gestion de TX
+  * @note   baud rate = 9600 , 8 bits de données,1 bit de stop
+	* @param  
+  * @retval Aucun
+  */
+	
+void envoi_donnee(char data){
+		
+	LL_GPIO_SetOutputPin(GPIOA, LL_GPIO_PIN_11);      // on passe PA11 à 1 : début transmission
+	
+	USART1->DR |= data; 														  // Ecriture de la donnée dans le registre DR
+	while(LL_USART_IsActiveFlag_TXE(USART1)==1) {}   	// Attente de la fin de transmission	
+		
+	LL_GPIO_ResetOutputPin(GPIOA, LL_GPIO_PIN_11);	  // on passe PA11 à 0 : trasmission terminée
+	
+	}
+
 

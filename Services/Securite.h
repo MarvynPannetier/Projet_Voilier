@@ -6,6 +6,6 @@
 
 void gestion_chavirement(void) ;
 
-void config_chavirement(void);
+void config_chavirement(int v);
 
 
