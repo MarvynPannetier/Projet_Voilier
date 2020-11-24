@@ -84,7 +84,7 @@ int Calcul_duty_cycle(int alpha) {
 void Asservissement_voile() {
 	
 	// Actualisation de la valeur du pulse = duty cycle
-	PWM_Output_Pulse(TIM4, Calcul_duty_cycle(TIM3->CNT));
+	//PWM_Output_Pulse(TIM4, Calcul_duty_cycle(TIM3->CNT));
 	
 }
 
