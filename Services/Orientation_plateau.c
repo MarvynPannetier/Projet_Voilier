@@ -32,6 +32,9 @@ void config_orientation(void)
 	// Configuration du Timer en mode PWM
 	PWM_Output_Conf_TIM(TIM2,LL_TIM_CHANNEL_CH2);
 	
+	// Active le timer
+	MyTimer_Start(TIM2);
+	
 }
 
 
@@ -61,18 +64,19 @@ void Rotation_plateau(){
 	 LL_GPIO_ResetOutputPin(GPIOA, LL_GPIO_PIN_2) ;
 	vitesse = (duty + 37.5);  
 	} 	
+	else 
+	{
+		vitesse = 0 ;
+	}
   
 	//on envoie une PWM avec un duty cycle qui dépend de Timp pour que la vitesse varie 
-	PWM_OUT_plateau(TIM2,LL_TIM_CHANNEL_CH2,vitesse); 
+	PWM_OUT_plateau(TIM2,vitesse); 
 }
 
-void PWM_OUT_plateau(TIM_TypeDef * Timer, uint32_t Channel,int pulse)
+void PWM_OUT_plateau(TIM_TypeDef * Timer, int pulse)
 	
  {
 	// Configuration du rapport cyclique
 	PWM_Output_Pulse(Timer, pulse);
-	
-	// Active le timer
-	MyTimer_Start(Timer);
-	
+		
 }

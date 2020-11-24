@@ -111,10 +111,7 @@ void PWM_OUT_bordage(TIM_TypeDef * Timer, uint32_t Channel,int pulse)
 	
 	// Configuration du Timer en mode PWM
 	PWM_Output_Conf_TIM(Timer, Channel);
-	
-	// Configuration du rapport cyclique
-	//PWM_Output_Pulse(Timer, 5);
-	
+		
 	// Active le timer
 	MyTimer_Start(Timer);
 	
