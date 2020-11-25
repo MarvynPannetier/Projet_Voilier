@@ -17,10 +17,6 @@ void config_orientation(void)
 	//conf PA1 pour envoyer la PWM au Moteur CC
 	GPIO_output_conf(GPIOA, LL_GPIO_PIN_1 , LL_GPIO_MODE_ALTERNATE, LL_GPIO_SPEED_FREQ_LOW,LL_GPIO_OUTPUT_PUSHPULL) ;
 	
-	//Configuration du Timer de Base
-	
-	MyTimer_Conf(TIM4, 0xFFFF, 0);
-	
 	
 	//Configuration TIM INPUT CAPTURE
 	
@@ -70,7 +66,7 @@ void Rotation_plateau(){
 	}
   
 	//on envoie une PWM avec un duty cycle qui dépend de Timp pour que la vitesse varie 
-	PWM_OUT_plateau(TIM2,vitesse); 
+	PWM_OUT_plateau(TIM2,20); 
 }
 
 void PWM_OUT_plateau(TIM_TypeDef * Timer, int pulse)
