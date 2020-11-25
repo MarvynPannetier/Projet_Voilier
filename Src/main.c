@@ -34,7 +34,7 @@ void  SystemClock_Config(void);
 /*J'ai réorganisé chaque couche : 
 -dans chacunes aucun fichier n'est dépendant de l'autre, ils sont tous en parallèles
 -j'ai donc laissé dans la couche que les fonctions essentielles 
--dans la couche services,j'ai recombiné les fonctions de la couche driver pour pouvoir configurer chacunes des parties
+-dans la couche services, j'ai recombiné les fonctions de la couche driver pour pouvoir configurer chacunes des parties
 -dans la couche services, il y a aussi nos fonctions de traitement qui sont appelées dans la boucle while du main ou dans les interuption SYSTICK
 -dans le main, j'ai commencé par appeler toutes les fonctions de configuration. Le but étant qu'on ne reconfigure pas à chaque fois qu'on utilise un périph 
 -Si une pin change le jour du test il faut donc juste modifier les arguments de ces fonctions au début du main
@@ -144,7 +144,7 @@ void SysTick_Handler(void)  {   //le systick déborde toutes les 1ms
 		gestion_chavirement();
 	}
 	
-/* gestion du bordage de la voile , tous les 200 ms*/
+/* gestion du bordage de la voile , tous les 20 ms*/
 	compteur_voile ++ ;
 	if (compteur_voile==200) {
 		compteur_voile=0;

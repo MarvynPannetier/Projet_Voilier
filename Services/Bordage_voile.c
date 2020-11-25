@@ -35,7 +35,7 @@ void config_girouette() {
 	
 	
 	// Configuration du PWM Output
-	PWM_OUT_bordage(TIM4,LL_TIM_CHANNEL_CH3,5);
+	PWM_OUT_bordage();
 	
 	// configuration du timer en mode encoder associé aux voies A et B de la girouette
 	Encoder_Conf();
@@ -60,16 +60,17 @@ int Calcul_duty_cycle(int alpha) {
 
 	int pulse = 0; 					// valeur du duty cycle
 	
-	if (alpha <= 180) {
-		pulse = 1/18 * (alpha/2) + 5;
+	if (alpha<45 || alpha>315) {
+		pulse = 5;
+	}
+	if (alpha <= 180 && alpha >= 45) {
+		pulse = 1/18*(90/135 * alpha - 30) +5; // attention --> penser à modifier sous forme 1/18 * teta + 5
 	}
 	
-	else {
-		pulse = 1/18 * (360-alpha/2) + 5;
+	if (alpha > 180 && alpha <= 315) {
+		pulse = 1/18*(180 - (90/135 * alpha - 30))+5;
 	}
-	
-	return pulse;
-	
+	 return pulse;
 }
 
 
@@ -84,7 +85,7 @@ int Calcul_duty_cycle(int alpha) {
 void Asservissement_voile() {
 	
 	// Actualisation de la valeur du pulse = duty cycle
-	//PWM_Output_Pulse(TIM4, Calcul_duty_cycle(TIM3->CNT));
+	PWM_Output_Pulse(TIM4, Calcul_duty_cycle(TIM3->CNT));
 	
 }
 
@@ -93,27 +94,26 @@ void Asservissement_voile() {
 
 /**
 	* @brief  Configuration de la PWM Output
-  * @note   Pour les pins PA1 = TIM2_CH2 pour le moteur CC ou PB8 = TIM4_CH3 pour le servo moteur
-	* @param  TIM_TypeDef Timer : indique le timer à configurer TIM2 ou TIM4
-						int pulse : valeur du rapport cyclique
+  * @note   configuration de PB8 = TIM4_CH3 pour le servo moteur
+	* @param  Aucun
   * @retval Aucun
   */
 
-void PWM_OUT_bordage(TIM_TypeDef * Timer, uint32_t Channel,int pulse)
+void PWM_OUT_bordage()
 	
  {
 	
 	// Configuration de l'IO bordage_voile en Output PushPull
 	GPIO_output_conf(GPIOB, LL_GPIO_PIN_8, LL_GPIO_MODE_ALTERNATE, LL_GPIO_SPEED_FREQ_LOW, LL_GPIO_OUTPUT_PUSHPULL);
 	
-	// Configuration du timer avec une periode de 20ms/fréquence de 20khz
-	MyTimer_Conf(Timer, 3599, 0);
+	// Configuration du timer 4 avec une periode de 20ms/fréquence de 20khz
+	MyTimer_Conf(TIM4, 3599, 0);
 	
 	// Configuration du Timer en mode PWM
-	PWM_Output_Conf_TIM(Timer, Channel);
+	PWM_Output_Conf_TIM(TIM4, LL_TIM_CHANNEL_CH3);
 		
 	// Active le timer
-	MyTimer_Start(Timer);
+	MyTimer_Start(TIM4);
 	
 }
  
@@ -136,7 +136,7 @@ void Encoder_Conf() {
 	LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM3);
 	
 // 3- Configurer les valeurs ARR (=360) et PSC(=0) du Timer --> utilisation de la fonction My_Timer_Conf
-	MyTimer_Conf(TIM3,359,0);
+	MyTimer_Conf(TIM3,360,0);
 	
 // 4- Initialiser le timer en mode encoder --> on compte ou décompte en fonction du niveau des deux entrées
 	Encoder_Conf_Timer();

@@ -17,14 +17,15 @@
   * @note   Pour les pins PA1 = TIM2_CH2 pour le moteur CC ou PB8 = TIM4_CH3 pour le servo moteur
 	* @param  TIM_TypeDef Timer : indique le timer à configurer TIM2 ou TIM4
 						int pulse : valeur du rapport cyclique
+						uint32_t Channel : 
   * @retval Aucun
   */
 
 
 void PWM_Output_Conf_TIM(TIM_TypeDef *Timer, uint32_t Channel) {
 		
-		LL_TIM_CC_EnableChannel(Timer,Channel);
-		LL_TIM_OC_SetMode(Timer,Channel,LL_TIM_OCMODE_PWM1);
+		LL_TIM_CC_EnableChannel(Timer, Channel);
+		LL_TIM_OC_SetMode(Timer, Channel, LL_TIM_OCMODE_PWM1);
 	 	
 }
 
