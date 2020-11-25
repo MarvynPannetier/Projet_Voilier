@@ -72,7 +72,7 @@ int main(void)
 	
   while (1)
   {
-		//tâche de fond : transmission USART
+		
   }
 }
 

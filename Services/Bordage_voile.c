@@ -31,15 +31,12 @@ void Demarrage_Timer() {
 	
 	
 void config_girouette() {
-	
-	
-	
+
 	// Configuration du PWM Output
 	PWM_OUT_bordage();
 	
 	// configuration du timer en mode encoder associé aux voies A et B de la girouette
 	Encoder_Conf();
-	
 	
 	// configuration de l'entrée associé à l'index 
 	Index_Conf(Demarrage_Timer);	
