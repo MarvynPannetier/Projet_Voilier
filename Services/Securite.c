@@ -12,11 +12,9 @@
 void gestion_chavirement() {
 	
 	while(convert_single1() < valeur_critique_chavirement){ 		//on mesure l'angle de roulis avec convert_single()
-	LL_TIM_CC_EnableChannel(TIM4,LL_TIM_CHANNEL_CH3);
 	envoi_donnee('c'); 																			//on envoi l'info qu'on est en train de chavirer
-	PWM_Output_Pulse(TIM4,10); 															//on borde les voiles à 90° pour empêcher le chavirement
+	PWM_Output_Pulse(TIM4,99); 															//on borde les voiles à 90° pour empêcher le chavirement
 	}
-	LL_TIM_CC_DisableChannel(TIM4, LL_TIM_CHANNEL_CH3);
 }
 
 
@@ -25,3 +23,4 @@ void config_chavirement(int v){
 	configure_adc1_single(v);
 }
 
+//faire marcher pwm moteur cc

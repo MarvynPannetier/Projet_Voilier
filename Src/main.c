@@ -68,8 +68,7 @@ int main(void)
 	config_batterie(12);
 	config_envoi() ;
 	
-	
-	
+
   while (1)
   {
 		

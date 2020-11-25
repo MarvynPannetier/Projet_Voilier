@@ -155,7 +155,7 @@ void Index_Conf(void (*IT_function)(void)) {
 	GPIO_input_conf(GPIOA, LL_GPIO_PIN_5, LL_GPIO_MODE_FLOATING);
 	
 	// Réglage interruption du Timer avec callback : 
-	Index_IT_Conf(IT_function,1);
+	Index_IT_Conf(IT_function,-5);
 	
 	// Validation IT
 	Index_IT_enable();
