@@ -68,22 +68,6 @@ int main(void)
 	config_batterie(12);
 	config_envoi() ;
 	
-	
-	PWM_Output_Pulse(TIM4,10);
-	/*// Configuration de l'IO bordage_voile en Output PushPull
-	GPIO_output_conf(GPIOA, LL_GPIO_PIN_6, LL_GPIO_MODE_OUTPUT, LL_GPIO_SPEED_FREQ_LOW, LL_GPIO_OUTPUT_PUSHPULL);
-	
-	// Configuration du timer avec une periode de 20ms/fréquence de 20khz
-	MyTimer_Conf(TIM3, 3599, 0);
-	
-	// Configuration du Timer en mode PWM
-	PWM_Output_Conf_TIM(TIM3, LL_TIM_CHANNEL_CH1);
-		
-	LL_TIM_OC_SetCompareCH1(TIM3,TIM3->ARR*9/100);	
-	// Active le timer
-	MyTimer_Start(TIM3);*/
-	
-	
 
   while (1)
   {
