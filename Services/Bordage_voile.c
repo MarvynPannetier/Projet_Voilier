@@ -53,19 +53,21 @@ void config_girouette() {
 	* @retval int Pulse : valeur du duty cycle de la PWM du servo moteur
   */
 
-int Calcul_duty_cycle(int alpha) {
+int Calcul_duty_cycle(float alpha) {
 
-	int pulse = 0; 					// valeur du duty cycle
+	float pulse = 0; 					// valeur du duty cycle
 	
-	if (alpha<0x2D || alpha>0x13B) {
+	if (alpha<45.0 || alpha>315.0) {
 		pulse = 5;
 	}
-	if (alpha <= 180 && alpha >= 45) {
-		pulse = 1/18*(90/135 * alpha - 30) +5; // attention --> penser à modifier sous forme 1/18 * teta + 5
+	if (alpha <= 180.0 && alpha >= 45.0) {
+			
+		pulse = (90 * alpha/135 - 30)/18 +5; // attention --> penser à modifier sous forme 1/18 * teta + 5
 	}
 	
-	if (alpha > 180 && alpha <= 315) {
-		pulse = 1/18*(180 - (90/135 * alpha - 30))+5;
+	if (alpha > 180.0 && alpha <= 315.0) {
+		
+		pulse = (180.0 - (90 * alpha/135 - 30.0))/18+5.0;
 	}
 	 return pulse;
 }

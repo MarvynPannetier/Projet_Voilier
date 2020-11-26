@@ -38,7 +38,7 @@ void config_girouette(void);
   */
 
 
-int Calcul_duty_cycle(int alpha);
+int Calcul_duty_cycle(float alpha);
 
 /**
 	* @brief  Actualisation de la valeur de l'angle des voiles en fonction de la direction du vent
