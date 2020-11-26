@@ -52,7 +52,7 @@ void envoi_donnee(char data){
 	LL_GPIO_SetOutputPin(GPIOA, LL_GPIO_PIN_11);      // on passe PA11 à 1 : début transmission
 	
 	USART1->DR |= data; 														  // Ecriture de la donnée dans le registre DR
-	while(LL_USART_IsActiveFlag_TXE(USART1)==1) {}   	// Attente de la fin de transmission	
+	while(LL_USART_IsActiveFlag_TC(USART1)==0) {}   	// Attente de la fin de transmission	
 		
 	LL_GPIO_ResetOutputPin(GPIOA, LL_GPIO_PIN_11);	  // on passe PA11 à 0 : trasmission terminée
 	

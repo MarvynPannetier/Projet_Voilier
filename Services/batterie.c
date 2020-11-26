@@ -11,7 +11,14 @@ float batterie_faible = 819 ; //batterie faible en dessous de 20%
 void gestion_batterie() {
 	
 	if (convert_single2() < batterie_faible){ 		//on mesure le niveau de la batterie
+		envoi_donnee('l');
+		envoi_donnee('o');
+		envoi_donnee('w');
+		envoi_donnee(' ');
 		envoi_donnee('b');
+		envoi_donnee('a');
+		envoi_donnee('t');	
+		envoi_donnee(0x0D);
 	}
 }
 

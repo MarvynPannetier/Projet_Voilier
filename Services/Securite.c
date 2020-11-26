@@ -12,9 +12,29 @@
 void gestion_chavirement() {
 	
 	while(convert_single1() < valeur_critique_chavirement){ 		//on mesure l'angle de roulis avec convert_single()
-	//envoi_donnee('c'); 																			//on envoi l'info qu'on est en train de chavirer
-	PWM_Output_Pulse(TIM4,10); 															//on borde les voiles à 90° pour empêcher le chavirement
+	envoi_donnee('c');
+envoi_donnee('h');
+		envoi_donnee('a');
+		envoi_donnee('v');
+		envoi_donnee('i');
+		envoi_donnee('r');
+		envoi_donnee('e');
+		envoi_donnee('m');
+		envoi_donnee('e');
+		envoi_donnee('n');
+		envoi_donnee('t');
+		envoi_donnee(' ');
+    envoi_donnee('\n');
+		//envoi_donnee(0x0D);
+	
+		
+
+
+		//on envoi l'info qu'on est en train de chavirer
+	PWM_Output_Pulse(TIM4,5); 															//on borde les voiles à 90° pour empêcher le chavirement
 	}
+	
+	
 }
 
 

@@ -27,7 +27,7 @@ int Calcul_Etat_Voiles() {
 
 void Envoi_Etat_Voiles() {
 	char data = (char) Calcul_Etat_Voiles();    // On récupère la valeur qu'on transforme en caractère
-	envoi_donnee(data);
+	envoi_donnee('data');
 
 }
 
