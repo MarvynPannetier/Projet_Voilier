@@ -57,7 +57,7 @@ int Calcul_duty_cycle(int alpha) {
 
 	int pulse = 0; 					// valeur du duty cycle
 	
-	if (alpha<45 || alpha>315) {
+	if (alpha<0x2D || alpha>0x13B) {
 		pulse = 5;
 	}
 	if (alpha <= 180 && alpha >= 45) {
@@ -104,8 +104,7 @@ void PWM_OUT_bordage()
 	GPIO_output_conf(GPIOB, LL_GPIO_PIN_8, LL_GPIO_MODE_ALTERNATE, LL_GPIO_SPEED_FREQ_LOW, LL_GPIO_OUTPUT_PUSHPULL);
 	
 	// Configuration du timer 4 avec une periode de 20ms/fréquence de 20khz
-	MyTimer_Conf(TIM4, 3599, 0);
-	
+	MyTimer_Conf(TIM4, 3599, 400);
 	// Configuration du Timer en mode PWM
 	PWM_Output_Conf_TIM(TIM4, LL_TIM_CHANNEL_CH3);
 		
@@ -155,7 +154,7 @@ void Index_Conf(void (*IT_function)(void)) {
 	GPIO_input_conf(GPIOA, LL_GPIO_PIN_5, LL_GPIO_MODE_FLOATING);
 	
 	// Réglage interruption du Timer avec callback : 
-	Index_IT_Conf(IT_function,-5);
+	Index_IT_Conf(IT_function,1);
 	
 	// Validation IT
 	Index_IT_enable();

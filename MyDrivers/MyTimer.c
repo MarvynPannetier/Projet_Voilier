@@ -41,7 +41,7 @@ void Conf_Input_Capture()
 	TIM4->SMCR &= ~(1<<5);
 	
 	TIM4->SMCR |=(1<<2);
-	TIM4->SMCR &= ((1<<0)|(1<<1));
+	TIM4->SMCR &= ~((1<<0)|(1<<1));
 	
 	TIM4->CCER |=((1<<0)|(1<<4));
 }

@@ -57,17 +57,35 @@ int main(void)
 	// activation de la clock du périphérique du port B lié à APB2
 	LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOB);
 	LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOA);
+	LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOC);
+
 	
 	// activation de la clock du périphérique du port A lié à APB1
 	LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_USART1); 
 	
 	// configuration des fonctions de service
 	config_girouette(); 
-	config_orientation();
-	config_chavirement(8);
-	config_batterie(12);
-	config_envoi() ;
+	//config_orientation();
+	//config_chavirement(11);
+	//config_batterie(12);
+	//config_envoi() ;
 	
+/*GPIO_output_conf(GPIOA, LL_GPIO_PIN_9 , LL_GPIO_MODE_ALTERNATE, LL_GPIO_SPEED_FREQ_LOW,LL_GPIO_OUTPUT_PUSHPULL) ;
+	
+
+	
+		// Configuration du timer avec une periode de 20ms/fréquence de 20khz
+	MyTimer_Conf(TIM1, 0xFFFF, 0);
+	
+	// Configuration du Timer en mode PWM
+	PWM_Output_Conf_TIM(TIM1,LL_TIM_CHANNEL_CH2);
+	
+	LL_TIM_OC_SetCompareCH2(TIM1,TIM1->ARR*0.1);
+	// Active le timer
+	MyTimer_Start(TIM1);*/
+
+
+
 
   while (1)
   {
@@ -99,7 +117,7 @@ void SystemClock_Config(void)
   /* Enable HSE oscillator */
 	// ********* Commenter la ligne ci-dessous pour MCBSTM32 *****************
 	// ********* Conserver la ligne si Nucléo*********************************
-  LL_RCC_HSE_EnableBypass();
+  //LL_RCC_HSE_EnableBypass();
   LL_RCC_HSE_Enable();
   while(LL_RCC_HSE_IsReady() != 1)
   {
@@ -135,13 +153,13 @@ void SystemClock_Config(void)
 /* ==============   INTERUPTION SYSTICK = ORDONANCEUR          ============== */
 
 void SysTick_Handler(void)  {   //le systick déborde toutes les 1ms                         
-	
-/* gestion du chavirement, tous les 100ms*/
-	compteur_chavirement ++ ; 
-	if (compteur_chavirement==100) {
-		compteur_chavirement=0;
-		gestion_chavirement();
-	}
+//	
+///* gestion du chavirement, tous les 100ms*/
+//	compteur_chavirement ++ ; 
+//	if (compteur_chavirement==100) {
+//		compteur_chavirement=0;
+//		gestion_chavirement();
+//	}
 	
 /* gestion du bordage de la voile , tous les 20 ms*/
 	compteur_voile ++ ;
@@ -150,28 +168,28 @@ void SysTick_Handler(void)  {   //le systick déborde toutes les 1ms
 		Asservissement_voile();
 	}
 	
-	/* gestion de l'emetteur RF , tous les 3 s*/
-	compteur_emetteur ++ ;
-	if (compteur_emetteur==3000) {
-		compteur_emetteur=0;
-		Envoi_Etat_Voiles();
-	}
-	
-/* gestion de la batterie, tous les secondes*/
-	
-	compteur_batterie ++ ;
-	if (compteur_batterie==1000) {
-		compteur_batterie=0;
-		gestion_batterie();
-	}
+//	/* gestion de l'emetteur RF , tous les 3 s*/
+//	compteur_emetteur ++ ;
+//	if (compteur_emetteur==3000) {
+//		compteur_emetteur=0;
+//		Envoi_Etat_Voiles();
+//	}
+//	
+///* gestion de la batterie, tous les secondes*/
+//	
+//	compteur_batterie ++ ;
+//	if (compteur_batterie==1000) {
+//		compteur_batterie=0;
+//		gestion_batterie();
+//	}
 
 //gestion rotaion plateau toute les 100ms 	
-	
+/*	
 	compteur_plateau ++ ;
 	if (compteur_plateau==100) {
 		compteur_plateau=0;
 		Rotation_plateau();
-	}
+	}*/
 }
 
 /* ==============   BOARD SPECIFIC CONFIGURATION CODE END      ============== */

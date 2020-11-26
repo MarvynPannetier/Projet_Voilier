@@ -4,6 +4,7 @@
 #include "GPIO.h"
 #include "stm32f1xx_ll_gpio.h"
 #include "orientation_plateau.h"
+#include "math.h"
 
 void config_orientation(void)
 {
@@ -11,6 +12,8 @@ void config_orientation(void)
 // Configuration en input --> Port B Pin 6 
 	
 	//conf PB6 pour recevoir la pwm de la télécommande 
+	
+	GPIO_input_conf(GPIOB , LL_GPIO_PIN_7 , LL_GPIO_MODE_INPUT);
 	GPIO_input_conf(GPIOB , LL_GPIO_PIN_6 , LL_GPIO_MODE_INPUT);
 	//conf PA2 pour indiquer le sens de rotation
   GPIO_output_conf(GPIOA, LL_GPIO_PIN_2 , LL_GPIO_MODE_ALTERNATE, LL_GPIO_SPEED_FREQ_LOW,LL_GPIO_OUTPUT_PUSHPULL) ;
@@ -39,15 +42,16 @@ void config_orientation(void)
 
 void Rotation_plateau(){
 	
-	int period ;
-	int duty ;
-	int period_hight ;	
-	int vitesse ;
+	float period ;
+	float duty = 0;
+	float period_hight ;	
+	float vitesse ;
+	
 	
 	
 	//vérifier les données récupérer le jour du test 
-	period_hight = (TIM4->CCR2)*100 ;
-	period = TIM4->CCR1 ;
+	period_hight = (TIM4->CCR2)/10 ;
+	period = (TIM4->CCR1)/10;
 	duty = (period_hight/period)*100 ;
 	
 	if ( duty > 4.7 && duty < 7.2)
@@ -55,7 +59,7 @@ void Rotation_plateau(){
 		LL_GPIO_SetOutputPin(GPIOA, LL_GPIO_PIN_2) ;
 	vitesse= ((-duty)+ 45);
 	}
-	else if (duty > 7.8 && duty < 10.3 )
+	else if (duty > 7.8 && duty < 25)
 	{	
 	 LL_GPIO_ResetOutputPin(GPIOA, LL_GPIO_PIN_2) ;
 	vitesse = (duty + 37.5);  
